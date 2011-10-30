@@ -8,8 +8,8 @@
 
 function print_layout {
 
-	echo welcome to ducksboard
-	echo "*******************************"
+	echo welcome to the ducksboard API bash example :)
+	echo "*********************************************"
 	echo 
 	echo 
 	echo  "(+) (*)                                         [______________]"
@@ -20,9 +20,9 @@ function print_layout {
 	echo  "+--------------++--------------++--------------++--------------+"
 	echo  "+--------------++--------------++--------------+"
 	echo  "|              ||              ||              |"
-	echo  "|              ||              || (8) picture  |"
+	echo  "|              ||              ||  (8) image   |"
 	echo  "|              ||              ||              |"
-	echo  "| (6) timeline || (7) picture  |+--------------+"
+	echo  "| (6) timeline ||  (7) image   |+--------------+"
 	echo  "|              ||              |"
 	echo  "|              ||              |"
 	echo  "|              ||              |"
