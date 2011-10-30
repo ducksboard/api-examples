@@ -71,6 +71,19 @@ instance, setting this to (list 232 354) will send events to
 https://push.ducksboard.com/values/232/ and
 https://push.ducksboard.com/values/354/"
   :type       '(repeat integer)
+
+(defcustom ducksboard-interesting-file "."
+  "A regular expression that gets matched against the file name
+before an event gets sent. If the name does not match, the event
+is not sent."
+  :type	      'regexp
+  :group      'ducksboard)
+
+(defcustom ducksboard-file-name-transform 'identity
+  "A function that gets passed the file name and should return a
+transformed name, useful if you want to for example get rid of
+part of the path."
+  :type	      'function
   :group      'ducksboard)
 
 
@@ -100,15 +113,17 @@ https://push.ducksboard.com/values/354/"
 		 '(open (image "created" verb "opened")
 			edit (image "edited" verb "edited")
 			close (image "deleted" verb "closed"))
-		 operation)))
+		 operation))
+	(file-name (buffer-file-name (current-buffer))))
     (cond ((not params) (message "unrecognized operation"))
-	  ((not (stringp (buffer-file-name (current-buffer)))) nil)
-	  (t (let* ((file-name (buffer-file-name (current-buffer)))
+	  ((not (stringp file-name)) nil)
+	  ((not (string-match-p ducksboard-interesting-file file-name)) nil)
+	  (t (let* ((transformed (apply ducksboard-file-name-transform (list file-name)))
 		    (title (file-name-nondirectory file-name))
 		    (image (format "https://app.ducksboard.com/static/img/timeline/%s.png"
 				   (plist-get params 'image)))
 		    (content (format "%s %s %s" (or (user-full-name) (user-login-name))
-				     (plist-get params 'verb) file-name))
+				     (plist-get params 'verb) transformed))
 		    (value (list :title title :image image :content content)))
 	       (mapc (lambda (value-id) (ducksboard-send-value value-id value))
 		     ducksboard-file-operation-timeline-ids))))))
