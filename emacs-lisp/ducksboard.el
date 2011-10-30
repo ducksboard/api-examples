@@ -56,13 +56,13 @@ Features:
 
 (defcustom ducksboard-url "https://push.ducksboard.com/"
   "The URL to use for sending events."
-  :type       'string
-  :group      'ducksboard)
+  :type 'string
+  :group 'ducksboard)
 
 (defcustom ducksboard-api-key ""
   "The API key to use for sending Ducksboard events."
-  :type       'string
-  :group      'ducksboard)
+  :type 'string
+  :group 'ducksboard)
 
 (defcustom ducksboard-file-operation-timeline-ids '()
   "A list of endpoint IDs where the events will be sent. If you
@@ -70,21 +70,22 @@ specify many, an event will be sent to each endpoint. For
 instance, setting this to (list 232 354) will send events to
 https://push.ducksboard.com/values/232/ and
 https://push.ducksboard.com/values/354/"
-  :type       '(repeat integer)
+  :type '(repeat integer)
+  :group 'ducksboard)
 
 (defcustom ducksboard-interesting-file "."
   "A regular expression that gets matched against the file name
 before an event gets sent. If the name does not match, the event
 is not sent."
-  :type	      'regexp
-  :group      'ducksboard)
+  :type 'regexp
+  :group 'ducksboard)
 
 (defcustom ducksboard-file-name-transform 'identity
   "A function that gets passed the file name and should return a
 transformed name, useful if you want to for example get rid of
 part of the path."
-  :type	      'function
-  :group      'ducksboard)
+  :type 'function
+  :group 'ducksboard)
 
 
 (require 'url)
@@ -92,15 +93,15 @@ part of the path."
 
 (defun ducksboard-authorization (api-key)
   (cons "Authorization"
-	(format "Basic %s" (base64-encode-string (format "%s:%s" api-key "x")))))
+        (format "Basic %s" (base64-encode-string (format "%s:%s" api-key "x")))))
 
 (defun ducksboard-send-internal (value-id api-key content)
   (let ((url (format "%s/values/%d/" ducksboard-url value-id))
-	(url-request-method "POST")
-	(url-request-data content)
-	(url-request-extra-headers (list (ducksboard-authorization api-key))))
+        (url-request-method "POST")
+        (url-request-data content)
+        (url-request-extra-headers (list (ducksboard-authorization api-key))))
     (url-retrieve url (lambda (status)
-			(bury-buffer (current-buffer))))))
+                        (bury-buffer (current-buffer))))))
 
 (defun ducksboard-send-value (value-id value)
   (if (= 0 (length ducksboard-api-key))
@@ -110,23 +111,23 @@ part of the path."
 
 (defun ducksboard-file-operation (operation)
   (let ((params (plist-get
-		 '(open (image "created" verb "opened")
-			edit (image "edited" verb "edited")
-			close (image "deleted" verb "closed"))
-		 operation))
-	(file-name (buffer-file-name (current-buffer))))
+                 '(open (image "created" verb "opened")
+                        edit (image "edited" verb "edited")
+                        close (image "deleted" verb "closed"))
+                 operation))
+        (file-name (buffer-file-name (current-buffer))))
     (cond ((not params) (message "unrecognized operation"))
-	  ((not (stringp file-name)) nil)
-	  ((not (string-match-p ducksboard-interesting-file file-name)) nil)
-	  (t (let* ((transformed (apply ducksboard-file-name-transform (list file-name)))
-		    (title (file-name-nondirectory file-name))
-		    (image (format "https://app.ducksboard.com/static/img/timeline/%s.png"
-				   (plist-get params 'image)))
-		    (content (format "%s %s %s" (or (user-full-name) (user-login-name))
-				     (plist-get params 'verb) transformed))
-		    (value (list :title title :image image :content content)))
-	       (mapc (lambda (value-id) (ducksboard-send-value value-id value))
-		     ducksboard-file-operation-timeline-ids))))))
+          ((not (stringp file-name)) nil)
+          ((not (string-match-p ducksboard-interesting-file file-name)) nil)
+          (t (let* ((transformed (apply ducksboard-file-name-transform (list file-name)))
+                    (title (file-name-nondirectory file-name))
+                    (image (format "https://app.ducksboard.com/static/img/timeline/%s.png"
+                                   (plist-get params 'image)))
+                    (content (format "%s %s %s" (or (user-full-name) (user-login-name))
+                                     (plist-get params 'verb) transformed))
+                    (value (list :title title :image image :content content)))
+               (mapc (lambda (value-id) (ducksboard-send-value value-id value))
+                     ducksboard-file-operation-timeline-ids))))))
 
 
 (defun ducksboard-find-file-hook ()
