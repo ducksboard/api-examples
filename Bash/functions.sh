@@ -8,7 +8,7 @@
 
 function print_layout {
 
-	echo welcome to the ducksboard API bash example :)
+	echo "welcome to the ducksboard API bash example :)"
 	echo "*********************************************"
 	echo 
 	echo 
@@ -39,47 +39,47 @@ function print_layout {
 function check_global_variables {
 
 	if [ "$COUNTER_URL_ID" = "" ]; then
-	echo " ********* You need to set all variables before running this script!"
+	echo " ********* You need to set all variables inside \"vars.sh\" before running this script!"
 	kill -SIGINT $$
 	fi
 
 	if [ "$GAUGE_URL_ID" = "" ]; then
-	echo " ********* You need to set all variables before running this script!"
+	echo " ********* You need to set all variables inside \"vars.sh\" before running this script!"
 	kill -SIGINT $$
 	fi
 
 	if [ "$GAUGE_LEFT_URL_ID" = "" ]; then
-	echo " ********* You need to set all variables before running this script!"
+	echo " ********* You need to set all variables inside \"vars.sh\" before running this script!"
 	kill -SIGINT $$
 	fi
 
 	if [ "$GAUGE_RIGHT_URL_ID" = "" ]; then
-	echo " ********* You need to set all variables before running this script!"
+	echo " ********* You need to set all variables inside \"vars.sh\" before running this script!"
 	kill -SIGINT $$
 	fi
 
 	if [ "$GRAPH_URL_ID" = "" ]; then
-	echo " ********* You need to set all variables before running this script!"
+	echo " ********* You need to set all variables inside \"vars.sh\" before running this script!"
 	kill -SIGINT $$
 	fi
 
 	if [ "$TIMELINE_URL_ID" = "" ]; then
-	echo " ********* You need to set all variables before running this script!"
+	echo " ********* You need to set all variables inside \"vars.sh\" before running this script!"
 	kill -SIGINT $$
 	fi
 
 	if [ "$PICTURE_URL_ID" = "" ]; then
-	echo " ********* You need to set all variables before running this script!"
+	echo " ********* You need to set all variables inside \"vars.sh\" before running this script!"
 	kill -SIGINT $$
 	fi
 
 	if [ "$PICTURE_SMALL_URL_ID" = "" ]; then
-	echo " ********* You need to set all variables before running this script!"
+	echo " ********* You need to set all variables inside \"vars.sh\" before running this script!"
 	kill -SIGINT $$
 	fi
 
 	if [ "$API_KEY" = "" ]; then
-	echo " ********* You need to set all variables before running this script!"
+	echo " ********* You need to set all variables inside \"vars.sh\" before running this script!"
 	kill -SIGINT $$
 	fi
 
