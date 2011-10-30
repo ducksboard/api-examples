@@ -47,8 +47,8 @@
 ;; that hold IDs of the data sources where your data will be
 ;; displayed.  Use M-x customize-group ducksboard for that.
 
-;; To enable the package, edit your .emacs file and put the following
-;; line in it
+;; To enable the package, put it in your load-path, edit your .emacs
+;; file and put the following line in it
 ;; (require 'ducksboard)
 
 ;; To enable specific funcionality, evaluate the following, or
