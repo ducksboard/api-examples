@@ -16,7 +16,7 @@ clear
 # we will check all global variables are set
 check_global_variables
 
-# INICIALIZAMOS!!!!
+# Go, go, go!!!!
 
 print_layout
 
