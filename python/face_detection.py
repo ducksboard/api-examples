@@ -287,7 +287,9 @@ class FaceDetector(object):
                     opencv.cvPoint(int(face.x + face.width),
                     int(face.y + face.height)), opencv.CV_RGB(127, 255, 0), 2)
 
-        return image, faces
+        # return faces casted to list here, otherwise some obscure bug
+        # in opencv will make it segfault if the casting happens later
+        return image, list(faces)
 
 
 def main(counter_endpoint, timeline_endpoint, image_endpoint,
@@ -325,7 +327,7 @@ def main(counter_endpoint, timeline_endpoint, image_endpoint,
         while True:
             new_image = opencv.cvCloneMat(grabber.image)
             image, faces = detector.detect(new_image)
-            num_faces = len(list(faces))
+            num_faces = len(faces)
             if num_faces != last_num_faces:
                 last_num_faces = num_faces
                 for sender, value in ((counter_sender, num_faces),
