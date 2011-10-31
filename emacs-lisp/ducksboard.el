@@ -122,13 +122,21 @@ ducksboard-file-operation-timeline-ids for details"
   :group 'ducksboard)
 
 (defcustom ducksboard-keystrokes-state-file "~/.ducksboard-keystrokes"
-  "The file used to persist number of keystrokes between sessions."
+  "The file used to persist the number of keystrokes between sessions."
   :type 'file
   :group 'ducksboard)
 
 
 (require 'url)
 (require 'json)
+
+
+(defvar *ducksboard-keystrokes-count* -1
+  "A keystrokes counter, where -1 means it needs to be loaded
+  from the ondisk cache.")
+(defvar *ducksboard-send-keystrokes-timer* nil
+  "The timer that sends keystroke counts.")
+
 
 (defun ducksboard-authorization (api-key)
   (cons "Authorization"
@@ -193,12 +201,6 @@ ducksboard-file-operation-timeline-ids for details"
   (remove-hook 'kill-buffer-hook 'ducksboard-kill-buffer-hook))
 
 
-(defvar *ducksboard-keystrokes-count* -1
-  "A keystrokes counter, where -1 means it needs to be loaded
-  from the ondisk cache.")
-(defvar *ducksboard-send-keystrokes-timer* nil
-  "The timer that sends keystroke counts.")
-
 (defun ducksboard-send-keystrokes ()
   (let ((value *ducksboard-keystrokes-count*))
     (mapc (lambda (value-id) (ducksboard-send-value value-id value))
@@ -221,6 +223,7 @@ ducksboard-file-operation-timeline-ids for details"
     (with-temp-buffer
       (insert-file-contents-literally ducksboard-keystrokes-state-file)
       (setq *ducksboard-keystrokes-count* (string-to-number (buffer-string))))))
+
 
 (defun ducksboard-keystrokehooks-enable ()
   (interactive)
