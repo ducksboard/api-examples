@@ -1,3 +1,6 @@
+#!/usr/bin/env python
+
+
 # Copyright (C) 2011 Ducksboard
 #
 # Permission is hereby granted, free of charge, to any person obtaining a copy
