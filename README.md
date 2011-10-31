@@ -9,4 +9,4 @@ A short list of things included here:
  * a desktop/webcam grabber
  * a CEO's journey into the land of bash
 
-Details at http://blog.ducksboard.com/2011/10/play-with-websockets-win-some-cash/ 
+Details at http://blog.ducksboard.com/2011/10/lets-make-a-distributed-hackathon/
