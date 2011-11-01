@@ -19,8 +19,7 @@ Before starting
 
 You'll need to create some custom widgets ordered to recreate this screensot: 
 
-<img width=800 src="https://github.com/ducksboard/API-Examples/raw/master/Bash/bash_dashboard_screenshot.png" />
-
+<img width=800 src="https://github.com/ducksboard/API-Examples/raw/master/bash/bash_dashboard_screenshot.png" />
 
 As you can see, the kind of custom widgets used are:
 
@@ -41,4 +40,4 @@ Just give executing permission to "bars.sh" and run it :)
 
 If everything is OK, you'll see this screen:
 
-<img width=600 src="https://github.com/ducksboard/API-Examples/raw/master/Bash/bash_terminal_screenshot.png" />
+<img width=600 src="https://github.com/ducksboard/API-Examples/raw/master/bash/bash_terminal_screenshot.png" />
