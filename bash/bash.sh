@@ -13,11 +13,7 @@
 # let's clear the terminal before printing the layout
 clear
 
-# we will check all global variables are set
-check_global_variables
-
 # Go, go, go!!!!
-
 print_layout
 
 

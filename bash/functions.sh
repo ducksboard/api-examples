@@ -26,68 +26,21 @@ function print_layout {
 	echo  "|                ||                ||    \/    \/    |||__||__||__||__||"
 	echo  "+----------------++----------------++----------------++----------------+"
 	echo
-	echo -e "Which widget do you want to test? (1-8)"
+	echo -e "Which widget data-source do you want to test? (1-17)"
 	read widget_id
 	input_data $widget_id
 }
 
 
-
-
-function check_global_variables {
-
-	if [ "$COUNTER_URL_ID" = "" ]; then
-	echo " ********* You need to set all variables inside \"vars.sh\" before running this script!"
-	kill -SIGINT $$
-	fi
-
-	if [ "$GAUGE_URL_ID" = "" ]; then
-	echo " ********* You need to set all variables inside \"vars.sh\" before running this script!"
-	kill -SIGINT $$
-	fi
-
-	if [ "$GAUGE_LEFT_URL_ID" = "" ]; then
-	echo " ********* You need to set all variables inside \"vars.sh\" before running this script!"
-	kill -SIGINT $$
-	fi
-
-	if [ "$GAUGE_RIGHT_URL_ID" = "" ]; then
-	echo " ********* You need to set all variables inside \"vars.sh\" before running this script!"
-	kill -SIGINT $$
-	fi
-
-	if [ "$GRAPH_URL_ID" = "" ]; then
-	echo " ********* You need to set all variables inside \"vars.sh\" before running this script!"
-	kill -SIGINT $$
-	fi
-
-	if [ "$TIMELINE_URL_ID" = "" ]; then
-	echo " ********* You need to set all variables inside \"vars.sh\" before running this script!"
-	kill -SIGINT $$
-	fi
-
-	if [ "$PICTURE_URL_ID" = "" ]; then
-	echo " ********* You need to set all variables inside \"vars.sh\" before running this script!"
-	kill -SIGINT $$
-	fi
-
-	if [ "$PICTURE_SMALL_URL_ID" = "" ]; then
-	echo " ********* You need to set all variables inside \"vars.sh\" before running this script!"
-	kill -SIGINT $$
-	fi
-
-	if [ "$API_KEY" = "" ]; then
-	echo " ********* You need to set all variables inside \"vars.sh\" before running this script!"
-	kill -SIGINT $$
-	fi
-
-
-}
-
 function input_data {
 	
 	if [ $1 = 1 ]; then
-	
+		
+		if [ -z "$COUNTER_URL_ID" -o -z "$API_KEY" ]; then
+			echo "You need to set COUNTER_URL_ID and API_KEY at \"vars.sh\"  before using this widget!"
+			kill -SIGINT $$		
+		fi
+		
     	echo -e "Which value do you want to push? [integer]"
 		read value_to_push
 		json="{\"value\": $value_to_push }"
@@ -100,6 +53,11 @@ function input_data {
 		echo 
 
 	elif [ $1 = 2 ]; then
+
+		if [ -z "$GAUGE_URL_ID" -o -z "$API_KEY" ]; then
+			echo "You need to set GAUGE_URL_ID and API_KEY at \"vars.sh\"  before using this widget!"
+			kill -SIGINT $$		
+		fi
 
     	echo -e "Which value do you want to push? [0.00-1.00]"
 		read value_to_push
@@ -114,6 +72,11 @@ function input_data {
 		
 	elif [ $1 = 3 ]; then
 
+		if [ -z "$GAUGE_LEFT_URL_ID" -o -z "$API_KEY" ]; then
+			echo "You need to set GAUGE_LEFT_URL_ID and API_KEY at \"vars.sh\"  before using this widget!"
+			kill -SIGINT $$		
+		fi
+		
     	echo -e "Which value do you want to push? [0.00-1.00]"
 		read value_to_push
 		json="{\"value\": $value_to_push }"
@@ -127,6 +90,11 @@ function input_data {
 		
 	elif [ $1 = 4 ]; then
 
+		if [ -z "$GAUGE_RIGHT_URL_ID" -o -z "$API_KEY" ]; then
+			echo "You need to set GAUGE_RIGHT_URL_ID and API_KEY at \"vars.sh\"  before using this widget!"
+			kill -SIGINT $$		
+		fi
+		
     	echo -e "Which value do you want to push? [0.00-1.00]"
 		read value_to_push
 		json="{\"value\": $value_to_push }"
@@ -140,6 +108,11 @@ function input_data {
     	
  	elif [ $1 = 5 ]; then
 
+		if [ -z "$GRAPH_URL_ID" -o -z "$API_KEY" ]; then
+			echo "You need to set GRAPH_URL_ID and API_KEY at \"vars.sh\"  before using this widget!"
+			kill -SIGINT $$		
+		fi
+		
     	echo -e "Which FIRST value do you want to push? [integer]"
 		read value_to_push1
     	echo -e "Which SECOND value do you want to push? [integer]"
@@ -156,6 +129,11 @@ function input_data {
     	
 	elif [ $1 = 6 ]; then
 
+		if [ -z "$TIMELINE_URL_ID" -o -z "$API_KEY" ]; then
+			echo "You need to set TIMELINE_URL_ID and API_KEY at \"vars.sh\"  before using this widget!"
+			kill -SIGINT $$		
+		fi
+		
   		echo -e "What's the title of this event?"
 		read title_to_push
     	echo -e "What's the content of this event?"
@@ -179,6 +157,11 @@ function input_data {
 		  	
  	elif [ $1 = 7 ]; then
 
+		if [ -z "$PICTURE_URL_ID" -o -z "$API_KEY" ]; then
+			echo "You need to set PICTURE_URL_ID and API_KEY at \"vars.sh\"  before using this widget!"
+			kill -SIGINT $$		
+		fi
+		
     	echo -e "Where is located the image? [URL]"
 		read source_to_push
 		echo -e "Any caption to include?"
@@ -194,6 +177,11 @@ function input_data {
 
 	elif [ $1 = 8 ]; then
 
+		if [ -z "$PICTURE_SMALL_URL_ID" -o -z "$API_KEY" ]; then
+			echo "You need to set PICTURE_SMALL_URL_ID and API_KEY at \"vars.sh\"  before using this widget!"
+			kill -SIGINT $$		
+		fi
+		
     	echo -e "Where is located the image? [URL]"
 		read source_to_push
 		echo -e "Any caption to include?"
@@ -208,7 +196,12 @@ function input_data {
 		echo
 		
 	elif [ $1 = 9 ]; then
-	
+
+		if [ -z "$BAR_1_URL_ID" -o -z "$API_KEY" ]; then
+			echo "You need to set BAR_1_URL_ID and API_KEY at \"vars.sh\"  before using this widget!"
+			kill -SIGINT $$		
+		fi
+			
     	echo -e "Which value do you want to push? [integer]"
 		read value_to_push
 		json="{\"value\": $value_to_push }"
@@ -221,7 +214,12 @@ function input_data {
 		echo 		 
 		
 	elif [ $1 = 10 ]; then
-	
+
+		if [ -z "$BAR_2_URL_ID" -o -z "$API_KEY" ]; then
+			echo "You need to set BAR_2_URL_ID and API_KEY at \"vars.sh\"  before using this widget!"
+			kill -SIGINT $$		
+		fi
+			
     	echo -e "Which value do you want to push? [integer]"
 		read value_to_push
 		json="{\"value\": $value_to_push }"
@@ -234,7 +232,12 @@ function input_data {
 		echo 		 
 		
 	elif [ $1 = 11 ]; then
-	
+
+		if [ -z "$BAR_3_URL_ID" -o -z "$API_KEY" ]; then
+			echo "You need to set BAR_3_URL_ID and API_KEY at \"vars.sh\"  before using this widget!"
+			kill -SIGINT $$		
+		fi
+			
     	echo -e "Which value do you want to push? [integer]"
 		read value_to_push
 		json="{\"value\": $value_to_push }"
@@ -247,7 +250,12 @@ function input_data {
 		echo 		 
 		
 	elif [ $1 = 12 ]; then
-	
+
+		if [ -z "$PIN_1_URL_ID" -o -z "$API_KEY" ]; then
+			echo "You need to set PIN_1_URL_ID and API_KEY at \"vars.sh\"  before using this widget!"
+			kill -SIGINT $$		
+		fi
+			
     	echo -e "Which value do you want to push? [integer]"
 		read value_to_push
 		json="{\"value\": $value_to_push }"
@@ -260,7 +268,12 @@ function input_data {
 		echo 		 
 		
 	elif [ $1 = 13 ]; then
-	
+
+		if [ -z "$PIN_2_URL_ID" -o -z "$API_KEY" ]; then
+			echo "You need to set PIN_2_URL_ID and API_KEY at \"vars.sh\"  before using this widget!"
+			kill -SIGINT $$		
+		fi
+			
     	echo -e "Which value do you want to push? [integer]"
 		read value_to_push
 		json="{\"value\": $value_to_push }"
@@ -273,7 +286,12 @@ function input_data {
 		echo 		 
 		
 	elif [ $1 = 14 ]; then
-	
+
+		if [ -z "$BOX_1_URL_ID" -o -z "$API_KEY" ]; then
+			echo "You need to set BOX_1_URL_ID and API_KEY at \"vars.sh\"  before using this widget!"
+			kill -SIGINT $$		
+		fi
+			
     	echo -e "Which value do you want to push? [integer]"
 		read value_to_push
 		json="{\"value\": $value_to_push }"
@@ -286,7 +304,12 @@ function input_data {
 		echo 		 
 		
 	elif [ $1 = 15 ]; then
-	
+
+		if [ -z "$BOX_2_URL_ID" -o -z "$API_KEY" ]; then
+			echo "You need to set BOX_2_URL_ID and API_KEY at \"vars.sh\"  before using this widget!"
+			kill -SIGINT $$		
+		fi
+			
     	echo -e "Which value do you want to push? [integer]"
 		read value_to_push
 		json="{\"value\": $value_to_push }"
@@ -299,7 +322,12 @@ function input_data {
 		echo 		 
 		
 	elif [ $1 = 16 ]; then
-	
+
+		if [ -z "$BOX_3_URL_ID" -o -z "$API_KEY" ]; then
+			echo "You need to set BOX_3_URL_ID and API_KEY at \"vars.sh\"  before using this widget!"
+			kill -SIGINT $$		
+		fi
+			
     	echo -e "Which value do you want to push? [integer]"
 		read value_to_push
 		json="{\"value\": $value_to_push }"
@@ -312,7 +340,12 @@ function input_data {
 		echo 		 
 		
 	elif [ $1 = 17 ]; then
-	
+
+		if [ -z "$BOX_4_URL_ID" -o -z "$API_KEY" ]; then
+			echo "You need to set BOX_4_URL_ID and API_KEY at \"vars.sh\"  before using this widget!"
+			kill -SIGINT $$		
+		fi
+			
     	echo -e "Which value do you want to push? [integer]"
 		read value_to_push
 		json="{\"value\": $value_to_push }"
@@ -324,13 +357,10 @@ function input_data {
 		curl -u $API_KEY:ignored -d " $json "  https://push.ducksboard.com/values/$BOX_4_URL_ID/
 		echo 		 
 
-
-
-
 	else
 	
 		echo "Please, enter a correct value"
-		echo -e "Which widget do you want to test? (1-8)"
+		echo -e "Which widget do you want to test? (1-17)"
 		read widget_id
 		input_data $widget_id
   	
@@ -339,9 +369,9 @@ function input_data {
 
 function choose_image {
 			if [ -z "$1" ]; then 
-		    	echo "http://a1.twimg.com/profile_images/1299623597/Ducksboard_small_logo_reasonably_small.png"
+		    		echo "http://a1.twimg.com/profile_images/1299623597/Ducksboard_small_logo_reasonably_small.png"
 			elif [ $1 = 1 ]; then
-    			echo "https://dashboard.ducksboard.com/static/img/timeline/red.gif"
+    				echo "https://dashboard.ducksboard.com/static/img/timeline/red.gif"
 			elif [ $1 = 2 ]; then
 				echo "https://dashboard.ducksboard.com/static/img/timeline/green.gif"
 			elif [ $1 = 3 ]; then
@@ -354,8 +384,8 @@ function choose_image {
 				echo "https://dashboard.ducksboard.com/static/img/timeline/edited.png"
 			else
 				# By default, there's no image value, so we've added our logo to this script :)			
-		    	echo "http://a1.twimg.com/profile_images/1299623597/Ducksboard_small_logo_reasonably_small.png"
-		    fi 
+		    		echo "http://a1.twimg.com/profile_images/1299623597/Ducksboard_small_logo_reasonably_small.png"
+		   	fi 
 		    
 }
 
