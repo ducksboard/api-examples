@@ -4,29 +4,27 @@
 # To Public License, Version 2, as published by Sam Hocevar. See
 # http://sam.zoy.org/wtfpl/COPYING for more details.
 
-
-
 function print_layout {
 
 	echo "welcome to the ducksboard API bash example :)"
-	echo "*********************************************"
+	echo "*************************************************************************"
 	echo 
-	echo 
-	echo  "(+) (*)                                         [______________]"
-	echo  "+--------------++--------------++--------------++--------------+"
-	echo  "|              ||              ||              ||              |"
-	echo  "| (1) counter  ||  (2) gauge   ||  (3)    (4)  ||  (5) graph   |"
-	echo  "|              ||              || gauge  gauge ||              |"
-	echo  "+--------------++--------------++--------------++--------------+"
-	echo  "+--------------++--------------++--------------+"
-	echo  "|              ||              ||              |"
-	echo  "|              ||              ||  (8) image   |"
-	echo  "|              ||              ||              |"
-	echo  "| (6) timeline ||  (7) image   |+--------------+"
-	echo  "|              ||              |"
-	echo  "|              ||              |"
-	echo  "|              ||              |"
-	echo  "+--------------++--------------+"
+	echo  "(+) (*)                                               [________________]"
+	echo  "+----------------++----------------++----------------++----------------+"
+	echo  "|                ||                ||                ||                |"
+	echo  "|  (1) counter   ||   (2) gauge    ||   (3)    (4)   ||   (5) graph    |"
+	echo  "|                ||                ||  gauge  gauge  ||                |"
+	echo  "+----------------++----------------++----------------++----------------+"
+	echo  "+----------------++----------------++----------------++----------------+"
+	echo  "|                ||                ||                ||_____       bars|"
+	echo  "|                ||                ||   (8) image    || (9) |_____     |"
+	echo  "|                ||                ||                ||     |(10) |(11)|"
+	echo  "|  (6) timeline  ||   (7) image    |+----------------++----------------+"
+	echo  "|                ||                |+----------------++----------------+"
+	echo  "|                ||                ||   ____  ____   || __  __  __  __ |"
+	echo  "|                ||                ||  |(12)||(13)|  |||14||15||16||17||"
+	echo  "|                ||                ||    \/    \/    |||__||__||__||__||"
+	echo  "+----------------++----------------++----------------++----------------+"
 	echo
 	echo -e "Which widget do you want to test? (1-8)"
 	read widget_id
@@ -207,7 +205,127 @@ function input_data {
 		echo "************************"
 
 		curl -u $API_KEY:ignored -d " $json "  https://push.ducksboard.com/values/$PICTURE_SMALL_URL_ID/
-		echo 
+		echo
+		
+	elif [ $1 = 9 ]; then
+	
+    	echo -e "Which value do you want to push? [integer]"
+		read value_to_push
+		json="{\"value\": $value_to_push }"
+
+		echo "**** Generated JSON ****"		
+		echo $json		
+		echo "************************"
+
+		curl -u $API_KEY:ignored -d " $json "  https://push.ducksboard.com/values/$BAR_1_URL_ID/
+		echo 		 
+		
+	elif [ $1 = 10 ]; then
+	
+    	echo -e "Which value do you want to push? [integer]"
+		read value_to_push
+		json="{\"value\": $value_to_push }"
+
+		echo "**** Generated JSON ****"		
+		echo $json		
+		echo "************************"
+
+		curl -u $API_KEY:ignored -d " $json "  https://push.ducksboard.com/values/$BAR_2_URL_ID/
+		echo 		 
+		
+	elif [ $1 = 11 ]; then
+	
+    	echo -e "Which value do you want to push? [integer]"
+		read value_to_push
+		json="{\"value\": $value_to_push }"
+
+		echo "**** Generated JSON ****"		
+		echo $json		
+		echo "************************"
+
+		curl -u $API_KEY:ignored -d " $json "  https://push.ducksboard.com/values/$BAR_3_URL_ID/
+		echo 		 
+		
+	elif [ $1 = 12 ]; then
+	
+    	echo -e "Which value do you want to push? [integer]"
+		read value_to_push
+		json="{\"value\": $value_to_push }"
+
+		echo "**** Generated JSON ****"		
+		echo $json		
+		echo "************************"
+
+		curl -u $API_KEY:ignored -d " $json "  https://push.ducksboard.com/values/$PIN_1_URL_ID/
+		echo 		 
+		
+	elif [ $1 = 13 ]; then
+	
+    	echo -e "Which value do you want to push? [integer]"
+		read value_to_push
+		json="{\"value\": $value_to_push }"
+
+		echo "**** Generated JSON ****"		
+		echo $json		
+		echo "************************"
+
+		curl -u $API_KEY:ignored -d " $json "  https://push.ducksboard.com/values/$PIN_2_URL_ID/
+		echo 		 
+		
+	elif [ $1 = 14 ]; then
+	
+    	echo -e "Which value do you want to push? [integer]"
+		read value_to_push
+		json="{\"value\": $value_to_push }"
+
+		echo "**** Generated JSON ****"		
+		echo $json		
+		echo "************************"
+
+		curl -u $API_KEY:ignored -d " $json "  https://push.ducksboard.com/values/$BOX_1_URL_ID/
+		echo 		 
+		
+	elif [ $1 = 15 ]; then
+	
+    	echo -e "Which value do you want to push? [integer]"
+		read value_to_push
+		json="{\"value\": $value_to_push }"
+
+		echo "**** Generated JSON ****"		
+		echo $json		
+		echo "************************"
+
+		curl -u $API_KEY:ignored -d " $json "  https://push.ducksboard.com/values/$BOX_2_URL_ID/
+		echo 		 
+		
+	elif [ $1 = 16 ]; then
+	
+    	echo -e "Which value do you want to push? [integer]"
+		read value_to_push
+		json="{\"value\": $value_to_push }"
+
+		echo "**** Generated JSON ****"		
+		echo $json		
+		echo "************************"
+
+		curl -u $API_KEY:ignored -d " $json "  https://push.ducksboard.com/values/$BOX_3_URL_ID/
+		echo 		 
+		
+	elif [ $1 = 17 ]; then
+	
+    	echo -e "Which value do you want to push? [integer]"
+		read value_to_push
+		json="{\"value\": $value_to_push }"
+
+		echo "**** Generated JSON ****"		
+		echo $json		
+		echo "************************"
+
+		curl -u $API_KEY:ignored -d " $json "  https://push.ducksboard.com/values/$BOX_4_URL_ID/
+		echo 		 
+
+
+
 
 	else
 	

@@ -1,16 +1,36 @@
-# This program is free software. It comes without any warranty, to
-# the extent permitted by applicable law. You can redistribute it
-# and/or modify it under the terms of the Do What The Fuck You Want
-# To Public License, Version 2, as published by Sam Hocevar. See
-# http://sam.zoy.org/wtfpl/COPYING for more details.
-
-
+#1
 COUNTER_URL_ID=""
+#2
 GAUGE_URL_ID=""
+#3
 GAUGE_LEFT_URL_ID=""
+#4
 GAUGE_RIGHT_URL_ID=""
+#5
 GRAPH_URL_ID=""
+#6
 TIMELINE_URL_ID=""
+#7
 PICTURE_URL_ID=""
+#8
 PICTURE_SMALL_URL_ID=""
+#9
+BAR_1_URL_ID=""
+#10
+BAR_2_URL_ID=""
+#11
+BAR_3_URL_ID=""
+#12
+PIN_1_URL_ID=""
+#13
+PIN_2_URL_ID=""
+#14
+BOX_1_URL_ID=""
+#15
+BOX_2_URL_ID=""
+#16
+BOX_3_URL_ID=""
+#17
+BOX_4_URL_ID=""
+
 API_KEY=""
